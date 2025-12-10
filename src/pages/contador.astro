@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Counter from '../components/Counter.jsx';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+---
+
+<Layout>
+    <!-- El fondo degradado se aplica al contenedor principal -->
+    <div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+        
+        <!-- Contenedor principal para el contenido, dejando espacio para el Aside -->
+        <main class="max-w-7xl mx-auto p-4 md:p-8 lg:mr-16"> 
+            
+            <!-- Sección del Contador de React -->
+            <section id="contador" class="py-16">
+                <h1 class="text-5xl font-black text-center mb-4">Contador Interactivo</h1>
+                <p class="text-center text-indigo-300 mb-12 text-lg">Haz clic en el botón para sumar</p>
+                <!-- client:load es necesario para que el componente React con estado funcione -->
+                <Counter client:load />
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Aside Menu (Menú lateral que se esconde) -->
+    <AsideMenu />
+</Layout>

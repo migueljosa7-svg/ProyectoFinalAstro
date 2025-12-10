@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InstagramPost from '../components/InstagramPost.jsx';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+
+// Datos de ejemplo para Instagram
+const instagramPosts = [
+    { id: 1, imageUrl: "https://picsum.photos/id/1015/400/400", caption: "¡Noche épica en el ensayo! Prepárense para el show.", likes: 1250 },
+    { id: 2, imageUrl: "https://picsum.photos/id/1025/400/400", caption: "El escenario está casi listo. ¡Solo faltas tú!", likes: 980 },
+    { id: 3, imageUrl: "https://picsum.photos/id/1033/400/400", caption: "Conoce a la banda. ¿Cuál es tu canción favorita?", likes: 1500 },
+];
+---
+
+<Layout>
+    <!-- El fondo degradado se aplica al contenedor principal -->
+    <div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+        
+        <!-- Contenedor principal para el contenido, dejando espacio para el Aside -->
+        <main class="max-w-7xl mx-auto p-4 md:p-8 lg:mr-16"> 
+            
+            <!-- Sección de Instagram -->
+            <section id="instagram" class="py-16">
+                <h1 class="text-5xl font-black text-center mb-4">Publicaciones de Instagram</h1>
+                <p class="text-center text-indigo-300 mb-12 text-lg">Síguenos en nuestras redes sociales</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {instagramPosts.map((post) => (
+                        <!-- client:load es necesario para que el componente React con estado funcione -->
+                        <InstagramPost client:load 
+                            imageUrl={post.imageUrl} 
+                            caption={post.caption} 
+                            likes={post.likes} 
+                        />
+                    ))}
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Aside Menu (Menú lateral que se esconde) -->
+    <AsideMenu />
+</Layout>

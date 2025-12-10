@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+---
+
+<Layout>
+<div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+    <main class="max-w-7xl mx-auto p-4 md:p-8 lg:mr-16">
+
+        <!-- Sobre Nosotros -->
+        <section id="about-us" class="py-16">
+            <h2 class="text-4xl font-extrabold text-center text-yellow-200 mb-10">
+                Sobre Nosotros
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+                <!-- Información del equipo -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl transform hover:shadow-white scale-[1.02] transition duration-300">
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">Nuestro Equipo</h3>
+                    <p class="text-gray-300 mb-2">
+                        Somos un grupo de apasionados por la música y los eventos en vivo, comprometidos en crear experiencias inolvidables.
+                    </p>
+                    <p class="text-gray-300">
+                        Contamos con expertos en producción, marketing y tecnología para ofrecer shows de alta calidad.
+                    </p>
+                </div>
+
+                <!-- Filosofía y diseño del proyecto -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl transform hover:shadow-white scale-[1.02] transition duration-300">
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">Nuestra Filosofía</h3>
+                    <p class="text-gray-300 mb-2">
+                        Creemos que los eventos deben ser una experiencia completa: música, arte y comunidad.
+                    </p>
+                    <p class="text-gray-300">
+                        El diseño de nuestra plataforma busca ser intuitivo, atractivo y accesible, permitiendo a los usuarios descubrir y disfrutar cada detalle del festival.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<AsideMenu />
+</Layout>

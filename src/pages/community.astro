@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+
+// URL de la API pública de RandomUser
+const API_URL = 'https://randomuser.me/api/?results=6&nat=us';
+
+// Fetch de los usuarios en SSR
+const response = await fetch(API_URL);
+const data = await response.json();
+
+// Crear un array de "testimonios" ficticios
+const testimonials = data.results.map((user: any, index: number) => ({
+  name: `${user.name.first} ${user.name.last}`,
+  photo: user.picture.large,
+  comment: [
+    "¡Gran evento! Me encantó la organización.",
+    "La música fue espectacular y el ambiente increíble.",
+    "Volveré el próximo año sin duda.",
+    "Una experiencia única, muy recomendable.",
+    "Disfruté mucho cada minuto del festival.",
+    "Excelente lugar y artistas de primera."
+  ][index % 6] // Rotar comentarios
+}));
+---
+
+<Layout>
+<div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+
+  <AsideMenu />
+
+  <main class="max-w-7xl mx-auto p-4 md:p-8 lg:mr-16">
+
+    <!-- Comunidad / Asistentes recientes -->
+    <section id="community" class="py-16">
+      <h2 class="text-4xl font-extrabold text-center text-yellow-200 mb-10">
+        Comunidad del Festival
+      </h2>
+      <p class="text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+        Conoce a algunos de nuestros asistentes recientes y sus experiencias.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {testimonials.map((testimonial: any) => (
+          <div class="bg-gray-800 p-6 rounded-xl shadow-2xl hover:shadow-yellow-400 transition duration-300 transform hover:scale-[1.03]">
+            <img src={testimonial.photo} alt={testimonial.name} class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-yellow-400" />
+            <h3 class="text-xl font-bold text-yellow-400 mb-2 text-center">{testimonial.name}</h3>
+            <p class="text-gray-300 text-center italic">"{testimonial.comment}"</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </main>
+</div>
+</Layout>

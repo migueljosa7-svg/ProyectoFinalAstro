@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+
+// Datos de conciertos
+const concertData = {
+  title: "Festival Estelar 2025",
+  date: "Sábado, 12 de Julio",
+  location: "Estadio Metropolitano",
+  artists: [
+    { name: "The Cosmic Waves", genre: "Rock Alternativo", date: "Sábado, 12 de Julio", venue: "Estadio Metropolitano", image: "rock.png" },
+    { name: "Luna Nueva", genre: "Pop Electrónico", date: "Viernes, 1 de Agosto", venue: "Luna Park", image: "pop.png" },
+    { name: "DJ Vortex", genre: "Música Urbana", date: "Sábado, 20 de Septiembre", venue: "Club Nocturno", image: "urban.png" },
+    { name: "Noche de Jazz Suave", genre: "Jazz", date: "Viernes, 1 de Septiembre", venue: "Club Blue Note", image: "jazz.png" }
+  ],
+};
+
+// Eventos adicionales
+const moreEvents = [
+  { title: "Exposición de Arte Digital", date: "Miércoles, 15 de Octubre", location: "Galería Central", genre: "Arte" },
+  { title: "Maratón de Cine Clásico", date: "Sábado, 5 de Noviembre", location: "Cine Retro", genre: "Cine" },
+  { title: "Torneo de eSports 'Nexus'", date: "Domingo, 10 de Diciembre", location: "Arena Virtual", genre: "Gaming" },
+  { title: "Conferencia de Tecnología", date: "Jueves, 20 de Enero", location: "Centro de Convenciones", genre: "Tech" },
+];
+
+// Fetch de noticias
+const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+const posts = await response.json();
+---
+
+<Layout>
+  <div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 lg:mr-16">
+
+      <!-- Hero -->
+      <section id="hero-section" class="text-center py-24 md:py-32">
+        <h1 id="hero-title" class="text-7xl md:text-8xl font-black mb-6 tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-purple-400">
+          El Futuro del Entretenimiento
+        </h1>
+        <p id="hero-subtitle" class="text-2xl md:text-3xl font-light text-indigo-300 mb-10 max-w-3xl mx-auto">
+          Descubre eventos, música y experiencias que redefinen la noche.
+        </p>
+        <a href="#destacados" class="cta-button text-xl font-semibold bg-yellow-400 text-gray-900 inline-block px-10 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition duration-300 transform hover:scale-105">
+          Explora Nuestros Eventos
+        </a>
+      </section>
+
+      <!-- Destacados -->
+      <section id="destacados" class="mb-16 rounded-xl p-4 pt-20">
+        <h2 id="destacados-title" class="text-4xl font-bold text-center mb-10 text-indigo-400">Eventos Destacados</h2>
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl mb-12 border-l-8 border-yellow-400">
+          <h3 class="text-4xl font-bold mb-2">{concertData.title}</h3>
+          <p class="text-xl font-light text-indigo-300 mb-4">{concertData.date} | {concertData.location}</p>
+          <p class="text-lg mb-6">¡No te pierdas el evento más grande del año! Tres días de música, arte y tecnología.</p>
+          <a href="#" class="text-lg font-semibold bg-indigo-500 text-white inline-block px-6 py-2 rounded-full hover:bg-indigo-600 transition duration-300">
+            Ver Detalles
+          </a>
+        </div>
+      </section>
+
+      <!-- Próximos Conciertos -->
+      <section id="proximos-conciertos" class="py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">Próximos Conciertos Imperdibles</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {concertData.artists.map((artist) => (
+            <div class="concert-card bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300">
+              <img src={artist.image} alt={artist.name} class="h-48 w-full object-cover"/>
+              <div class="p-6">
+                <h3 class="text-2xl font-bold mb-1 text-yellow-400">{artist.name}</h3>
+                <p class="text-indigo-300 mb-3">{artist.genre}</p>
+                <p class="text-sm">{artist.date} | {artist.venue}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Otros Eventos -->
+      <section id="otros-eventos" class="py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 text-indigo-400">Otros Eventos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {moreEvents.map((event) => (
+            <div class="bg-gray-800 p-6 rounded-xl shadow-2xl border-l-4 border-yellow-400">
+              <h3 class="text-2xl font-bold mb-1 text-yellow-400">{event.title}</h3>
+              <p class="text-indigo-300 mb-2">{event.genre}</p>
+              <p class="text-sm">{event.date} | {event.location}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Noticias -->
+      <section id="noticias" class="mb-16 rounded-xl p-4 pt-10">
+        <h2 id="noticias-title" class="text-4xl font-bold text-center mb-10 text-yellow-400">Noticias de Última Hora</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <div class="news-card bg-gray-700 text-white p-6 rounded-xl shadow-2xl transform hover:scale-[1.02] transition duration-300 border-t-4 border-yellow-500">
+
+              <h4 class="text-xl font-bold mb-2">{post.title}</h4>
+
+              <p 
+                class="post-body text-sm text-gray-300" 
+                data-full={post.body}
+              >
+                {post.body.substring(0, 100)}...
+              </p>
+
+              <a href="#" class="leer-mas mt-4 inline-block text-yellow-400 hover:text-yellow-300 text-sm font-semibold">
+                Leer más
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Testimonios -->
+      <section id="testimonios" class="py-20">
+        <h2 id="testimonios-title" class="text-4xl font-bold text-center mb-12 text-yellow-400">Lo que dicen de nosotros</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { text: "La mejor experiencia de mi vida. La organización fue impecable y los artistas, de otro mundo.", author: "Laura M., Asistente al Festival" },
+            { text: "Compré las entradas fácilmente y el ambiente fue increíble. ¡Repetiré sin duda!", author: "Carlos R., Comprador de Entradas" },
+            { text: "Una plataforma muy intuitiva para descubrir eventos. Me encanta el diseño oscuro.", author: "Sofía P., Usuaria Frecuente" },
+          ].map((testimonial) => (
+            <div class="testimonial-card bg-gray-800 p-6 rounded-xl shadow-2xl border-l-4 border-indigo-500">
+              <p class="text-lg italic mb-4">"{testimonial.text}"</p>
+              <p class="font-semibold text-indigo-300">- {testimonial.author}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Newsletter -->
+      <section id="suscripcion" class="py-20 text-center bg-gray-800 rounded-xl shadow-2xl my-16 p-10">
+        <h2 class="text-4xl font-bold mb-4 text-yellow-400">No te pierdas nada</h2>
+        <p class="text-xl text-indigo-300 mb-8">
+          Suscríbete a nuestra newsletter para recibir las últimas noticias y ofertas exclusivas.
+        </p>
+
+        <form id="newsletterForm" class="max-w-lg mx-auto">
+          <div class="flex flex-col md:flex-row gap-4">
+            <input 
+              id="emailInput"
+              type="email"
+              placeholder="Introduce tu correo electrónico"
+              class="grow p-3 rounded-lg border-2 border-indigo-500 bg-gray-900 text-white focus:outline-none focus:border-yellow-400"
+              required
+            />
+
+            <button 
+              type="submit"
+              class="bg-yellow-400 text-gray-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-300 transition duration-300">
+              Suscribirme
+            </button>
+          </div>
+        </form>
+
+        <p id="responseMsg" class="mt-4 text-lg"></p>
+      </section>
+
+    </main>
+  </div>
+
+  <AsideMenu />
+
+  <script type="module" src="/src/scripts/gsap-scroll.js"></script>
+
+  <script>
+    // Newsletter
+    const form = document.getElementById("newsletterForm");
+    const emailInput = document.getElementById("emailInput");
+    const responseMsg = document.getElementById("responseMsg");
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|yahoo\.com|outlook\.com|live\\.com)$/i;
+
+    if (form && emailInput && responseMsg) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          responseMsg.textContent = "Por favor, introduce un correo electrónico.";
+          responseMsg.className = "mt-4 text-lg text-red-400";
+          return;
+        }
+
+        if (!emailRegex.test(email)) {
+          responseMsg.textContent = "Introduce un correo válido de Gmail, Hotmail, Yahoo o Outlook.";
+          responseMsg.className = "mt-4 text-lg text-red-400";
+          return;
+        }
+
+        responseMsg.textContent = `¡Gracias por suscribirte, ${email}!`;
+        responseMsg.className = "mt-4 text-lg text-green-400";
+        form.reset();
+      });
+    }
+
+    // Leer más / Leer menos
+    document.querySelectorAll(".leer-mas").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const card = btn.closest(".news-card");
+        const body = card.querySelector(".post-body");
+        const full = body.dataset.full;
+        const short = full.substring(0, 100) + "...";
+
+        if (!btn.dataset.state || btn.dataset.state === "closed") {
+          body.textContent = full;
+          btn.textContent = "Leer menos";
+          btn.dataset.state = "opened";
+        } else {
+          body.textContent = short;
+          btn.textContent = "Leer más";
+          btn.dataset.state = "closed";
+        }
+      });
+    });
+  </script>
+
+</Layout>

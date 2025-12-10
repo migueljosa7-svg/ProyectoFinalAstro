@@ -1,0 +1,95 @@
+<section id="contacto" class="py-16">
+    <h2 class="text-4xl font-extrabold text-center text-yellow-200 mb-10">Zona de Contacto</h2>
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
+        <form id="contact-form" class="space-y-6">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre"
+                    class="text-gray-700 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-name">Por favor, ingresa tu nombre.</p>
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@dominio.com"
+                    class="text-gray-700 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-email">Por favor, ingresa un email válido.</p>
+            </div>
+            <div>
+                <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Asunto</label>
+                <input type="text" id="subject" name="subject" placeholder="Asunto del mensaje"
+                    class="text-gray-700 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150">
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-subject">Por favor, ingresa un asunto.</p>
+            </div>
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+                <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje aquí..."
+                    class="text-gray-700 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"></textarea>
+                <p class="text-red-600 text-sm mt-1 hidden" id="error-message">Por favor, escribe un mensaje.</p>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.01] shadow-lg">
+                Enviar Mensaje
+            </button>
+
+            <!-- Mensaje general de éxito -->
+            <p id="form-success" class="text-green-600 text-center mt-4 font-semibold hidden">¡Mensaje enviado correctamente!</p>
+        </form>
+    </div>
+</section>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+
+    const fields = {
+        name: document.getElementById('name'),
+        email: document.getElementById('email'),
+        subject: document.getElementById('subject'),
+        message: document.getElementById('message')
+    };
+
+    const errors = {
+        name: document.getElementById('error-name'),
+        email: document.getElementById('error-email'),
+        subject: document.getElementById('error-subject'),
+        message: document.getElementById('error-message')
+    };
+
+    const successMsg = document.getElementById('form-success');
+
+    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let isValid = true;
+
+        // Validación de campos
+        for (const key in fields) {
+            if (!fields[key].value.trim() || (key === 'email' && !validateEmail(fields.email.value.trim()))) {
+                errors[key].classList.remove('hidden');
+                isValid = false;
+            } else {
+                errors[key].classList.add('hidden');
+            }
+        }
+
+        if (isValid) {
+            successMsg.classList.remove('hidden');
+            console.log("Formulario enviado con éxito:");
+            console.log("Nombre:", fields.name.value.trim());
+            console.log("Email:", fields.email.value.trim());
+            console.log("Asunto:", fields.subject.value.trim());
+            console.log("Mensaje:", fields.message.value.trim());
+
+            setTimeout(() => {
+                form.reset();
+            }, 2500);
+        } else {
+            successMsg.classList.add('hidden');
+        }
+    });
+});
+</script>
+

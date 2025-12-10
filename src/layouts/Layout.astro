@@ -1,0 +1,52 @@
+---
+import Header from "../components/Header.astro";
+const { url } = Astro.request;
+let fileName = (url.split("/").pop() || "").replace(".astro", "") || "Inicio";
+fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).toLowerCase();
+---
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{fileName}</title>
+
+		<link rel="icon" href="favicon.svg" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.svg" type="image/x-icon" />
+	</head>
+
+	<body class="min-h-screen text-gray-800 antialiased relative">
+		<Header />
+		<slot />
+
+		<!-- Botón scroll to top siempre visible -->
+		<button id="scrollTopBtn" 
+		        class="fixed bottom-8 right-8 w-12 h-12 bg-indigo-600 text-white rounded-full shadow-lg flex items-center justify-center 
+		               hover:bg-indigo-700 z-50">
+		  ↑
+		</button>
+
+		<script>
+		  const scrollBtn = document.getElementById("scrollTopBtn");
+
+		  // Hacer scroll suave al hacer clic
+		  if (scrollBtn) {
+			scrollBtn.addEventListener("click", () => {
+			  window.scrollTo({
+				top: 0,
+				behavior: "smooth"
+			  });
+			});
+		  }
+		</script>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

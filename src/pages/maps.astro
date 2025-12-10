@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AsideMenu from '../components/AsideMenu.astro';
+import '../styles/global.css';
+
+const concertData = {
+    title: "Festival Estelar 2025",
+    date: "Sábado, 12 de Julio",
+    location: "Estadio Metropolitano",
+    artists: [
+        { name: "The Cosmic Waves", genre: "Rock Alternativo" },
+        { name: "Luna Nueva", genre: "Pop Electrónico" },
+        { name: "DJ Vortex", genre: "Música Urbana" },
+    ],
+};
+
+const moreEvents = [
+    { title: "Noche de Jazz Suave", date: "Viernes, 1 de Septiembre", location: "Club Blue Note", genre: "Jazz" },
+    { title: "Exposición de Arte Digital", date: "Miércoles, 15 de Octubre", location: "Galería Central", genre: "Arte" },
+];
+---
+
+<Layout>
+<div class="min-h-screen bg-linear-to-br from-gray-900 via-indigo-900 to-purple-900 text-white">
+
+    <!-- Aside arriba -->
+    <AsideMenu />
+
+    <!-- Contenido principal -->
+    <main class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Dashboard Mejorado -->
+        <section id="dashboard" class="py-16">
+            <h2 class="text-4xl font-extrabold text-center text-yellow-200 mb-10">
+                Dashboard del Evento
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl text-center transform transition duration-300 hover:shadow-white scale-105 hover:shadow-2xl">
+                    <h3 class="text-4xl font-extrabold text-indigo-400 mb-2">{concertData.artists.length}</h3>
+                    <p class="text-gray-300 font-semibold">Artistas Confirmados</p>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl text-center transform transition duration-300 hover:shadow-white scale-105 hover:shadow-2xl">
+                    <h3 class="text-4xl font-extrabold text-indigo-400 mb-2">{moreEvents.length}</h3>
+                    <p class="text-gray-300 font-semibold">Próximos Eventos</p>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl text-center transform transition duration-300 hover:shadow-white scale-105 hover:shadow-2xl">
+                    <h3 class="text-4xl font-extrabold text-indigo-400 mb-2">{concertData.date}</h3>
+                    <p class="text-gray-300 font-semibold">Fecha del Festival</p>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-xl shadow-2xl text-center transform transition duration-300 hover:shadow-white scale-105 hover:shadow-2xl">
+                    <h3 class="text-4xl font-extrabold text-indigo-400 mb-2">{concertData.artists[0].genre}</h3>
+                    <p class="text-gray-300 font-semibold">Género Principal</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Mapa de Ubicación (debajo del aside y dashboard) -->
+        <section id="ubicacion" class="py-16">
+            <h2 class="text-4xl font-extrabold text-center text-yellow-200 mb-10">
+                Ubicación del Evento
+            </h2>
+            <div class="max-w-5xl mx-auto">
+                <div id="map" class="w-full h-96 rounded-xl shadow-2xl border border-gray-200"></div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Leaflet CSS y JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script type="module">
+document.addEventListener('DOMContentLoaded', () => {
+  const eventLatLng = [4.7110, -74.0721]; // Cambia a tu ubicación
+
+  const map = L.map('map').setView(eventLatLng, 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; Miguel Josa'
+  }).addTo(map);
+
+  const customIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+  });
+
+  L.marker(eventLatLng, { icon: customIcon })
+    .addTo(map)
+    .bindPopup('<b>Festival Estelar 2025</b><br>Estadio Metropolitano')
+    .openPopup();
+});
+</script>
+</Layout>
