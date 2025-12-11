@@ -1,14 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ShoppingCart from '../components/ShoppingCart.jsx';
-import AsideMenu from '../components/AsideMenu.astro';
-import '../styles/global.css';
+
 ---
 
 <Layout>
     <!-- El componente ShoppingCart maneja toda la interfaz -->
     <ShoppingCart client:load />
-    
-    <!-- Aside Menu (Menú lateral que se esconde) -->
-    <AsideMenu />
+
 </Layout>
