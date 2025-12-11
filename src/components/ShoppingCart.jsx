@@ -4,31 +4,79 @@ import ProductCard from './ProductCard';
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
 
-  const products = [
-    { id: 1, name: 'Camiseta Festival', price: 25.99, image: 'https://picsum.photos/id/10/400/400', details: 'Camiseta oficial del festival con algodón premium.' },
-    { id: 2, name: 'Gorra Oficial', price: 19.99, image: 'https://picsum.photos/id/11/400/400', details: 'Gorra ajustable con logo bordado del festival.' },
-    { id: 3, name: 'Sudadera Premium', price: 49.99, image: 'https://picsum.photos/id/12/400/400', details: 'Sudadera cómoda y abrigada, edición limitada.' },
-    { id: 4, name: 'Pulsera VIP', price: 9.99, image: 'https://picsum.photos/id/13/400/400', details: 'Pulsera exclusiva para los asistentes VIP.' },
-    { id: 5, name: 'Botella Reutilizable', price: 14.99, image: 'https://picsum.photos/id/14/400/400', details: 'Botella metálica reutilizable con grabado oficial.' },
-    { id: 6, name: 'Poster Edición Limitada', price: 12.99, image: 'https://picsum.photos/id/15/400/400', details: 'Póster de colección con arte exclusivo del festival.' }
-  ];
+  const [products, setProducts] = useState([
+    { id: 1, name: 'Camiseta Festival', price: 25.99, image: 'https://picsum.photos/id/10/400/400', details: 'Camiseta oficial del festival con algodón premium.', stock: 3 },
+    { id: 2, name: 'Gorra Oficial', price: 19.99, image: 'https://picsum.photos/id/11/400/400', details: 'Gorra ajustable con logo bordado del festival.', stock: 5 },
+    { id: 3, name: 'Sudadera Premium', price: 49.99, image: 'https://picsum.photos/id/12/400/400', details: 'Sudadera cómoda y abrigada, edición limitada.', stock: 2 },
+    { id: 4, name: 'Pulsera VIP', price: 9.99, image: 'https://picsum.photos/id/13/400/400', details: 'Pulsera exclusiva para los asistentes VIP.', stock: 10 },
+    { id: 5, name: 'Botella Reutilizable', price: 14.99, image: 'https://picsum.photos/id/14/400/400', details: 'Botella metálica reutilizable con grabado oficial.', stock: 6 },
+    { id: 6, name: 'Poster Edición Limitada', price: 12.99, image: 'https://picsum.photos/id/15/400/400', details: 'Póster de colección con arte exclusivo del festival.', stock: 1 }
+  ]);
 
   const addToCart = (product) => {
+    if (product.stock <= 0) return;
+
     const existing = cart.find((item) => item.id === product.id);
+
     if (existing) {
-      setCart(cart.map((item) => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
+      setCart(
+        cart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        )
+      );
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
+
+    // Reducir stock del producto
+    setProducts(
+      products.map((p) =>
+        p.id === product.id ? { ...p, stock: p.stock - 1 } : p
+      )
+    );
   };
 
   const removeFromCart = (id) => {
+    const item = cart.find((i) => i.id === id);
+
+    // Al eliminar del carrito se devuelve el stock
+    setProducts(
+      products.map((p) =>
+        p.id === id ? { ...p, stock: p.stock + item.quantity } : p
+      )
+    );
+
     setCart(cart.filter((item) => item.id !== id));
   };
 
   const updateQuantity = (id, qty) => {
-    if (qty <= 0) removeFromCart(id);
-    else setCart(cart.map((item) => item.id === id ? { ...item, quantity: qty } : item));
+    const item = cart.find((i) => i.id === id);
+    const diff = qty - item.quantity;
+
+    if (qty <= 0) {
+      removeFromCart(id);
+      return;
+    }
+
+    // Si intenta aumentar cantidad y no hay stock suficiente
+    if (diff > 0) {
+      const product = products.find((p) => p.id === id);
+      if (product.stock < diff) return;
+    }
+
+    // Actualizar carrito
+    setCart(
+      cart.map((item) =>
+        item.id === id ? { ...item, quantity: qty } : item
+      )
+    );
+
+    // Actualizar stock
+    setProducts(
+      products.map((p) =>
+        p.id === id ? { ...p, stock: p.stock - diff } : p
+      )
+    );
   };
 
   const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
@@ -43,7 +91,11 @@ export default function ShoppingCart() {
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
-                <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  addToCart={addToCart} 
+                />
               ))}
             </div>
           </div>
@@ -52,7 +104,9 @@ export default function ShoppingCart() {
             <div className="bg-white text-gray-900 rounded-lg shadow-2xl p-6 sticky top-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold">Carrito</h2>
-                <span className="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">{cart.length}</span>
+                <span className="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                  {cart.length}
+                </span>
               </div>
 
               {cart.length === 0 ? (
@@ -64,11 +118,25 @@ export default function ShoppingCart() {
                       <div key={item.id} className="border-b border-gray-200 pb-4 last:border-b-0">
                         <div className="flex justify-between items-start mb-2">
                           <h4 className="font-semibold text-sm">{item.name}</h4>
-                          <button onClick={() => removeFromCart(item.id)} className="text-red-500 hover:text-red-700 font-bold text-sm">✕</button>
+                          <button 
+                            onClick={() => removeFromCart(item.id)} 
+                            className="text-red-500 hover:text-red-700 font-bold text-sm"
+                          >
+                            ✕
+                          </button>
                         </div>
-                        <p className="text-indigo-600 font-semibold text-sm mb-2">${item.price.toFixed(2)}</p>
+
+                        <p className="text-indigo-600 font-semibold text-sm mb-2">
+                          ${item.price.toFixed(2)}
+                        </p>
+
                         <div className="flex items-center space-x-2">
-                          <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded text-sm">−</button>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded text-sm"
+                          >
+                            −
+                          </button>
                           <input
                             type="number"
                             value={item.quantity}
@@ -76,9 +144,17 @@ export default function ShoppingCart() {
                             className="w-12 text-center border border-gray-300 rounded py-1 text-sm"
                             min="1"
                           />
-                          <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded text-sm">+</button>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-1 px-2 rounded text-sm"
+                          >
+                            +
+                          </button>
                         </div>
-                        <p className="text-right font-semibold text-sm mt-2">${(item.price * item.quantity).toFixed(2)}</p>
+
+                        <p className="text-right font-semibold text-sm mt-2">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </p>
                       </div>
                     ))}
                   </div>
