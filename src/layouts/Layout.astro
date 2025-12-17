@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import AsideMenu from "../components/AsideMenu.astro";
+import Footer from "../components/Footer.astro";
 import '../styles/global.css';
 
 const { url } = Astro.request;
@@ -27,7 +28,7 @@ fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).toLowerCase();
 		               hover:bg-indigo-700 z-50">
 		  ↑
 		</button>
-
+		<Footer />
 		<script>
 		  const scrollBtn = document.getElementById("scrollTopBtn");
 
