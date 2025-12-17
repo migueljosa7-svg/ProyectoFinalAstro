@@ -1,105 +1,98 @@
-<!-- BOTÓN HAMBURGUESA (solo móvil) -->
-<button id="hamburger-btn" class="fixed top-4 right-4 text-3xl text-white md:hidden z-50 bg-gray-900 shadow-sm">
-    ☰
-</button>
-
-<!-- MENÚ LATERAL -->
 <aside 
     id="aside-menu"
-    class="fixed top-0 right-0 h-full w-64 bg-gray-900 text-white shadow-2xl z-40 
+    class="fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-900 text-gray-800 dark:text-white shadow-2xl z-40 
            transform translate-x-full transition-transform duration-300 
            md:translate-x-0 md:w-16 md:hover:w-64 md:overflow-hidden group"
 >
     <div class="p-4 flex flex-col h-full">
-
-        <!-- TÍTULO (PC solo) -->
         <h3 class="text-xl font-bold mb-8 whitespace-nowrap overflow-hidden hidden md:block">
             <span class="opacity-100 group-hover:opacity-100">Menú</span>
         </h3>
 
-        <!-- NAVEGACIÓN -->
-        <nav class="space-y-4 text-white">
-            <a href="/." class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+        <nav class="space-y-4">
+            <a href="/." class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">🏘️</span>
-                <!-- MÓVIL: texto visible, PC: oculto -->
-                <span class="inline md:hidden text-white">Inicio</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Inicio</span>
+                <span class="inline md:hidden">Inicio</span>
+                <span class="hidden md:inline whitespace-nowrap">Inicio</span>
             </a>
 
-            <a href="/tienda" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/tienda" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">💶</span>
-                <span class="inline md:hidden text-white">Tienda</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Tienda</span>
+                <span class="inline md:hidden">Tienda</span>
+                <span class="hidden md:inline whitespace-nowrap">Tienda</span>
             </a>
 
-            <a href="/instagram" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/instagram" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">📸</span>
-                <span class="inline md:hidden text-white">Instagram</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Instagram</span>
+                <span class="inline md:hidden">Instagram</span>
+                <span class="hidden md:inline whitespace-nowrap">Instagram</span>
             </a>
 
-            <a href="/contacto" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/contacto" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">✉️</span>
-                <span class="inline md:hidden text-white">Contacto</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Contacto</span>
+                <span class="inline md:hidden">Contacto</span>
+                <span class="hidden md:inline whitespace-nowrap">Contacto</span>
             </a>
 
-            <a href="/contador" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/contador" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">🔢</span>
-                <span class="inline md:hidden text-white">Contador</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Contador</span>
+                <span class="inline md:hidden">Contador</span>
+                <span class="hidden md:inline whitespace-nowrap">Contador</span>
             </a>
 
-            <a href="/concierto" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/concierto" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">🎤</span>
-                <span class="inline md:hidden text-white">Concierto</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Concierto</span>
+                <span class="inline md:hidden">Concierto</span>
+                <span class="hidden md:inline whitespace-nowrap">Concierto</span>
             </a>
 
-            <a href="/maps" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/maps" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">🗺️</span>
-                <span class="inline md:hidden text-white">Maps</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Maps</span>
+                <span class="inline md:hidden">Maps</span>
+                <span class="hidden md:inline whitespace-nowrap">Maps</span>
             </a>
 
-            <a href="/aboutus" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/aboutus" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">🙎</span>
-                <span class="inline md:hidden text-white">About us</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">About us</span>
+                <span class="inline md:hidden">About us</span>
+                <span class="hidden md:inline whitespace-nowrap">About us</span>
             </a>
 
-            <a href="/community" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/community" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">👨‍👩‍👧‍👦</span>
-                <span class="inline md:hidden text-white">Comunidad</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Comunidad</span>
+                <span class="inline md:hidden">Comunidad</span>
+                <span class="hidden md:inline whitespace-nowrap">Comunidad</span>
             </a>
 
-            <a href="/dashboard" class="flex items-center p-2 rounded-lg hover:bg-indigo-600 transition duration-200 text-white">
+            <a href="/dashboard" class="flex items-center p-2 rounded-lg hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors duration-200">
                 <span class="text-xl mr-3">📏</span>
-                <span class="inline md:hidden text-white">Métricas</span>
-                <span class="hidden md:inline whitespace-nowrap text-white">Métricas</span>
+                <span class="inline md:hidden">Métricas</span>
+                <span class="hidden md:inline whitespace-nowrap">Métricas</span>
             </a>
         </nav>
     </div>
 </aside>
 
-<!-- SCRIPT PARA ACTIVAR MENÚ EN MÓVIL CON HOVER -->
+<button id="hamburger-btn" class="fixed top-4 right-4 text-3xl text-gray-800 dark:text-white md:hidden z-50 bg-white dark:bg-gray-900 shadow-sm transition-colors">
+    ☰
+</button>
+
 <script>
-    const asideMenu = document.getElementById("aside-menu");
-    const hamburger = document.getElementById("hamburger-btn");
+const asideMenu = document.getElementById("aside-menu");
+const hamburger = document.getElementById("hamburger-btn");
 
-    if (asideMenu && hamburger) {
-        hamburger.addEventListener("mouseenter", () => {
-            asideMenu.classList.remove("translate-x-full");
-        });
+if (asideMenu && hamburger) {
+    hamburger.addEventListener("mouseenter", () => {
+        asideMenu.classList.remove("translate-x-full");
+    });
 
-        const hideMenu = () => {
-            if (!asideMenu.matches(':hover') && !hamburger.matches(':hover')) {
-                asideMenu.classList.add("translate-x-full");
-            }
-        };
+    const hideMenu = () => {
+        if (!asideMenu.matches(':hover') && !hamburger.matches(':hover')) {
+            asideMenu.classList.add("translate-x-full");
+        }
+    };
 
-        hamburger.addEventListener("mouseleave", hideMenu);
-        asideMenu.addEventListener("mouseleave", hideMenu);
-    }
+    hamburger.addEventListener("mouseleave", hideMenu);
+    asideMenu.addEventListener("mouseleave", hideMenu);
+}
 </script>

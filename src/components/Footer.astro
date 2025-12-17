@@ -1,42 +1,27 @@
----
-/* Footer.astro */
----
-<footer class="bg-gray-900 text-gray-300 mt-20">
+<footer class="bg-white dark:bg-gray-900 text-gray-800 dark:text-white mt-20 transition-colors shadow-md">
   <div class="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
 
-    <!-- Marca -->
     <div>
-      <h3 class="text-2xl font-semibold text-white mb-3">
-        Migue Josa
-      </h3>
-      <p class="text-sm text-gray-400 leading-relaxed">
-        Proyecto desarrollado con Astro y Tailwind CSS, diseño oscuro,
-        moderno y optimizado para rendimiento.
+      <h3 class="text-2xl font-semibold mb-3">Migue Josa</h3>
+      <p class="text-sm leading-relaxed">
+        Proyecto desarrollado con Astro y Tailwind CSS, diseño moderno y optimizado para rendimiento.
       </p>
     </div>
 
-    <!-- Navegación -->
     <div>
-      <h4 class="text-lg font-medium text-white mb-4">
-        Navegación
-      </h4>
+      <h4 class="text-lg font-medium mb-4">Navegación</h4>
       <nav class="flex flex-col gap-3 text-sm">
-        <a href="/" class="hover:text-white transition-colors">Inicio</a>
-        <a href="/dashboard" class="hover:text-white transition-colors">Dashboard</a>
-        <a href="/community" class="hover:text-white transition-colors">Community</a>
-        <a href="/contacto" class="hover:text-white transition-colors">Contacto</a>
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors">Inicio</a>
+        <a href="/dashboard" class="hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors">Dashboard</a>
+        <a href="/community" class="hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors">Community</a>
+        <a href="/contacto" class="hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors">Contacto</a>
       </nav>
     </div>
 
-    <!-- Redes -->
     <div class="flex flex-col justify-between">
       <div>
-        <h4 class="text-lg font-medium text-white mb-4">
-          Sígueme
-        </h4>
-        <a href="/instagram" 
-           class="inline-flex items-center gap-3 text-sm hover:text-white transition-colors">
-          <!-- Icono Instagram -->
+        <h4 class="text-lg font-medium mb-4">Sígueme</h4>
+        <a href="/instagram" class="inline-flex items-center gap-3 text-sm hover:text-indigo-600 dark:hover:text-yellow-400 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24">
             <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-.88a1.13 1.13 0 1 1 0 2.26 1.13 1.13 0 0 1 0-2.26Z"/>
           </svg>
@@ -44,9 +29,8 @@
         </a>
       </div>
 
-      <p class="text-xs text-gray-500 mt-8">
-        © <meta name="author" content="Miguel Josa" />
-        Miguel Josa — Derechos Reservados
+      <p class="text-xs mt-8">
+        © <meta name="author" content="Miguel Josa" /> Miguel Josa — Derechos Reservados
       </p>
     </div>
 
